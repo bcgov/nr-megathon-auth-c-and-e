@@ -5,27 +5,16 @@ BEGIN;
 
 create table ams_nrced.nrced(
   id serial primary key,
-  name varchar,
-  type varchar,
-  date_issued date,
-  issued_to varchar,
-  summary varchar,
-  issuing_agency varchar,
-  legislation_act varchar,
-  regulation varchar,
-  section varchar,
-  sub_section varchar,
-  paragraph varchar,
-  description varchar,
-  offence varchar,
-  penalties varchar,
-  site_project varchar,
-  location varchar,
-  latitude float,
-  longitude float,
-  authorization_id int
+  record jsonb
 );
 
-\COPY ams_nrced.nrced(name,type,date_issued,issued_to,summary,issuing_agency,legislation_act,regulation,section,sub_section,paragraph,description,offence,penalties,site_project,location,latitude,longitude) FROM '../data/nrced-export-2021-05-13_company.csv' with DELIMITER ',' CSV HEADER;
+create temporary table temp(json_data jsonb);
+\copy temp(json_data) from program 'sed ''s/\\/\\\\/g'' < ../data/nrced_0_9999.json | tr -d ''\n''';
+\copy temp(json_data) from program 'sed ''s/\\/\\\\/g'' < ../data/nrced_10000_19999.json | tr -d ''\n''';
+\copy temp(json_data) from program 'sed ''s/\\/\\\\/g'' < ../data/nrced_20000_26881.json | tr -d ''\n''';
+
+INSERT INTO ams_nrced.nrced(record) 
+select jsonb_array_elements(json_data) FROM temp;
+
 
 COMMIT;
