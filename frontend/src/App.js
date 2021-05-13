@@ -1,4 +1,5 @@
 import "./App.css";
+import { LOGO } from "./assets";
 import AuthorizationMap from "./AuthorizationMap";
 
 function App() {
@@ -7,7 +8,10 @@ function App() {
       <nav class="navbar fixed-top navbar-dark bg-primary">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            BC Government
+            <a href="https://gov.bc.ca/">
+              <img alt="BC Government Logo" src={LOGO} width={154} />
+            </a>
+            The Back Yard
           </a>
         </div>
       </nav>
