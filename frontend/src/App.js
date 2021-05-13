@@ -1,4 +1,5 @@
 import "./App.css";
+import AuthorizationMap from "./AuthorizationMap";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
           </a>
         </div>
       </nav>
+      <AuthorizationMap />
       <nav class="navbar fixed-bottom navbar-dark bg-primary">
         <div class="container-fluid">
           <a class="navbar-brand" href="#"></a>
