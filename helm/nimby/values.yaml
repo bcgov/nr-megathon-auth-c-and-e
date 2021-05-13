@@ -1,0 +1,50 @@
+route:
+  enable: true
+  host: nimby.apps.silver.devops.gov.bc.ca
+
+cas-postgres:
+  patroni:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 2Gi
+      requests:
+        cpu: 15m
+        memory: 600Mi
+    persistentVolume:
+      storageClass: netapp-block-standard
+      size: 5Gi
+    replicaCount: 1
+    namespace: 06dc2b-test
+    env:
+      ALLOW_NOSSL: true
+      USE_WALG_BACKUP: "false"
+      USE_WALG_RESTORE: "false"
+    walE:
+      enable: false
+
+metabase:
+  replicaCount: 1
+  image:
+    repository: gcr.io/ggl-cas-storage/metabase
+    tag: latest
+  database:
+    type: postgres
+    host: nimby-patroni
+    port: 5432
+    dbname: metabase
+    existingSecret: nimby
+    existingSecretUsernameKey: database-user
+    existingSecretPasswordKey: database-password
+  resources:
+    limits:
+      cpu: 1
+      memory: 4Gi
+    requests:
+      cpu: 50m
+      memory: 2Gi
+  podLabels:
+    app.kubernetes.io/component: app
+
+  nginxSidecar:
+    enable: false

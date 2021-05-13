@@ -1,0 +1,31 @@
+{{- if .Values.route.enable }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ template "nimby.fullname" . }}
+  labels:
+{{ include "nimby.labels" . | indent 4 }}
+
+spec:
+  host: {{ .Values.route.host }}
+  port:
+    targetPort: metabase
+{{- if .Values.metabase.nginxSidecar.sslTermination }}
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: passthrough
+{{- end }}
+  to:
+    kind: Service
+    name:  {{ template "nimby.fullname" . }}
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - status: 'True'
+      type: Admitted
+    host: {{ .Values.route.host }}
+    routerName: router
+    wildcardPolicy: None
+{{- end }}
