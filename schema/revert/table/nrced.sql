@@ -2,6 +2,6 @@
 
 BEGIN;
 
-drop table ams_nrced.nrced;
+drop table ams_nrced.nrced_json;
 
 COMMIT;
