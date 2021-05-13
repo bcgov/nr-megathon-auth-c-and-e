@@ -1,17 +1,18 @@
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: nimby-internal-by-instance
-  labels: { { include "nimby.labels" . | nindent 4 } }
+  name: {{ include "nimby.fullname" . }}-internal-by-instance
+  labels: {{ include "nimby.labels" . | nindent 4 }}
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/instance: { { include "nimby.name" . } }
+      app.kubernetes.io/instance: {{ include "nimby.name" . }}
   ingress:
     - from:
         - podSelector:
             matchLabels:
-              release: { { include "nimby.name" . } }
+              release: {{ include "nimby.name" . }}
         - podSelector:
             matchLabels:
-              app.kubernetes.io/instance: { { include "nimby.name" . } }
+              app.kubernetes.io/instance: {{ include "nimby.name" . }}
+

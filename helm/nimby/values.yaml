@@ -15,7 +15,7 @@ cas-postgres:
       storageClass: netapp-block-standard
       size: 5Gi
     replicaCount: 1
-    namespace: 06dc2b-test
+    namespace: 06dc2b-tools
     env:
       ALLOW_NOSSL: true
       USE_WALG_BACKUP: "false"
@@ -45,6 +45,5 @@ metabase:
       memory: 2Gi
   podLabels:
     app.kubernetes.io/component: app
-
   nginxSidecar:
     enable: false
