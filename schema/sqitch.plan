@@ -4,3 +4,4 @@
 schema 2021-05-13T17:23:16Z Matthieu Foucault <matthieu@button.is> # create schema
 table/authorization 2021-05-13T17:27:59Z Matthieu Foucault <matthieu@button.is> # create table authorization
 table/discharge 2021-05-13T17:28:19Z Matthieu Foucault <matthieu@button.is> # create table discharge
+table/nrced [schema] 2021-05-13T20:11:24Z Pierre Bastianelli <pierre.bastianelli@gov.bc.ca> # table that contains the nrced records
