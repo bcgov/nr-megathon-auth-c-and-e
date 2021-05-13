@@ -4,11 +4,11 @@ BEGIN;
 
 create table ams_nrced.authorization(
   id int primary key generated always as identity,
-  authorization_id int,
+  authorization_number int,
   authorization_type varchar(1000),
   company varchar(1000),
   issue_date date,
-  expiry_data date,
+  expiry_date date,
   waste_type varchar(1000),
   authorization_state varchar(1000),
   primary_bcenicid varchar(1000),
@@ -34,6 +34,6 @@ create table ams_nrced.authorization(
   mailing_address varchar(1000)
 );
 
-\copy ams_nrced.authorization(authorization_id, authorization_type, company, issue_date, expiry_data, waste_type, authorization_state, primary_bcenicid, secondary_bcenicid,  cpix,  risk_level,  wdr_regulation,  wdr_schedule,  regional_case_manager,  office, administrative_area, regional_district,region,nearest_municipality,facility_description,facility_address,facility_operator,facility_operator_phone,facility_operator_email, latitude, longitude, legal_land_description, mailing_address) FROM '../data/all_ams_authorizations.csv' WITH DELIMITER ',' CSV HEADER
+\copy ams_nrced.authorization(authorization_number, authorization_type, company, issue_date, expiry_date, waste_type, authorization_state, primary_bcenicid, secondary_bcenicid,  cpix,  risk_level,  wdr_regulation,  wdr_schedule,  regional_case_manager,  office, administrative_area, regional_district,region,nearest_municipality,facility_description,facility_address,facility_operator,facility_operator_phone,facility_operator_email, latitude, longitude, legal_land_description, mailing_address) FROM '../data/all_ams_authorizations.csv' WITH DELIMITER ',' CSV HEADER
 
 COMMIT;

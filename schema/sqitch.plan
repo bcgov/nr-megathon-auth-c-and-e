@@ -4,3 +4,6 @@
 schema 2021-05-13T17:23:16Z Matthieu Foucault <matthieu@button.is> # create schema
 table/authorization 2021-05-13T17:27:59Z Matthieu Foucault <matthieu@button.is> # create table authorization
 table/discharge 2021-05-13T17:28:19Z Matthieu Foucault <matthieu@button.is> # create table discharge
+table/nrced_json [schema] 2021-05-13T20:11:24Z Pierre Bastianelli <pierre.bastianelli@gov.bc.ca> # table that contains the nrced records
+table/nris_ams 2021-05-13T20:52:55Z Pierre Bastianelli <pierre.bastianelli@gov.bc.ca> # table relating nris ids to ams authorization ids
+views/nrced 2021-05-13T21:29:23Z Pierre Bastianelli <pierre.bastianelli@gov.bc.ca> # a view into the nrced json data
