@@ -79,3 +79,9 @@ h1 {
 .home-content {
   margin: 20px;
 }
+
+.button-group-center {
+  display: flex;
+  justify-content: center;
+  /* margin-top: 10px; */
+}
