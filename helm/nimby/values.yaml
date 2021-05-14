@@ -30,10 +30,10 @@ metabase:
     tag: latest
   database:
     type: postgres
-    host: nimby-patroni
+    host: nimby-metabase-patroni
     port: 5432
     dbname: metabase
-    existingSecret: nimby
+    existingSecret: nimby-metabase
     existingSecretUsernameKey: database-user
     existingSecretPasswordKey: database-password
   resources:
