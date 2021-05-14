@@ -14,3 +14,8 @@ Start API:
 
 - install [postgrest](https://postgrest.org/en/stable/tutorials/tut0.html#step-3-install-postgrest)
 - from repo root, run `postgrest api.conf`
+
+Start FE:
+- cd /frontend
+- npm install
+- npm start

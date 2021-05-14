@@ -2,6 +2,15 @@
   background: #036 !important;
 }
 
+.btn-secondary {
+  background: #fcba19 !important;
+  border: #fcba19 !important;
+}
+
+.btn-secondary:hover {
+  background: #efaa00 !important;
+  border: #fcba19 !important;
+}
 .leftMapPopUpCol {
   width: 10%;
 }
@@ -58,4 +67,15 @@ div[id="base-container"] {
 .leaflet-control-layers-scrollbar {
   overflow-y: scroll;
   padding-right: 10px;
+}
+
+.home {
+  margin: 40px;
+}
+h1 {
+  font-weight: bold;
+}
+
+.home-content {
+  margin: 20px;
 }
