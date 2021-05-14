@@ -28,7 +28,7 @@ function App() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <Link className="nav-link" to="/">
+                  <Link className="nav-link" to="/home">
                     Home
                   </Link>
                 </li>
@@ -50,7 +50,7 @@ function App() {
           <Route path="/map">
             <AuthorizationMap />
           </Route>
-          <Route path="/">
+          <Route path="/home">
             <Home />
           </Route>
           <Route path="/reporting">

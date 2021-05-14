@@ -261,8 +261,8 @@ class AuthorizationMap extends Component {
     const majorMinePermittedAreas = getMajorMinePermittedAreas();
     this.map.addLayer(majorMinePermittedAreas);
     const groupedOverlays = {
-      Mines: {
-        "Mine Pins": this.markerClusterGroup,
+      Authorizations: {
+        Authorizations: this.markerClusterGroup,
         "Major Mine Permitted Areas": majorMinePermittedAreas
       },
       Roads: this.getLayerGroupFromList(roadLayerArray),
@@ -342,7 +342,7 @@ class AuthorizationMap extends Component {
   }
 
   renderPopup = () => {
-    return ReactDOMServer.renderToStaticMarkup(<div>Popup</div>);
+    return ReactDOMServer.renderToStaticMarkup(<div>This is a static Pin</div>);
   };
 
   render() {
@@ -363,8 +363,8 @@ export default scriptLoader(
   "https://cdn.jsdelivr.net/leaflet.esri.renderers/2.0.2/esri-leaflet-renderers.js",
   // Load Leaflet Omnivore
   "https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js",
-  // Load Leaflet esri webMap
-  `http://localhost:3000/vendor/leaflet/esri-leaflet-webmap/esri-leaflet-webmap.js`,
-  // Load Leaflet measure
-  `http://localhost:3000//vendor/leaflet/leaflet-measure/leaflet-measure.en.js`
+  // // Load Leaflet esri webMap
+  "http://127.0.0.1:3001/src/vendor/leaflet/esri-leaflet-webmap/esri-leaflet-webmap.js",
+  // // Load Leaflet measure
+  "http://127.0.0.1:3001/src/vendor/leaflet/leaflet-measure/leaflet-measure.en.js"
 )(AuthorizationMap);

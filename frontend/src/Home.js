@@ -1,4 +1,5 @@
 import "./App.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -13,9 +14,11 @@ const Home = () => {
         </ul>
 
         <br />
-        <button type="button" class="btn btn-secondary">
-          Start Now
-        </button>
+        <Link className="nav-link" to="/map">
+          <button type="button" class="btn btn-secondary">
+            Start Now
+          </button>
+        </Link>
       </div>
       <br />
       <br />
