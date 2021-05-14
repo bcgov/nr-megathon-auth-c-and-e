@@ -255,7 +255,6 @@ handleButtonClick = (button) => {
       .then(res => {
         this.setState({active: button, isLoading: false})
         res.data.map(this.createPin);
-        console.log(res)
       })
       .catch(error => {
         console.log(error);
@@ -389,7 +388,6 @@ handleButtonClick = (button) => {
       )}
       <div
         style={{ height: "91.5vh", width: "100%", zIndex: 0, bottom: 0, position: "absolute" }}
-        // style={{ height: "70.5vh", width: "100%", zIndex: 0, bottom: 0, position: "absolute" }}
         id="leaflet-map"
       />
       </div>
