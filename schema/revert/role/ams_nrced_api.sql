@@ -2,6 +2,4 @@
 
 BEGIN;
 
-drop role ams_nrced_api;
-
 COMMIT;

@@ -35,5 +35,7 @@ create table ams_nrced.authorization(
 );
 
 \copy ams_nrced.authorization(authorization_number, authorization_type, company, issue_date, expiry_date, waste_type, authorization_state, primary_bcenicid, secondary_bcenicid,  cpix,  risk_level,  wdr_regulation,  wdr_schedule,  regional_case_manager,  office, administrative_area, regional_district,region,nearest_municipality,facility_description,facility_address,facility_operator,facility_operator_phone,facility_operator_email, latitude, longitude, legal_land_description, mailing_address) FROM '../data/all_ams_authorizations.csv' WITH DELIMITER ',' CSV HEADER
+update ams_nrced.authorization set longitude = -longitude;
+
 
 COMMIT;
