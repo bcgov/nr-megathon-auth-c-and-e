@@ -85,3 +85,18 @@ h1 {
   justify-content: center;
   /* margin-top: 10px; */
 }
+.spinner-border {
+  display: inline-block;
+  width: 5rem;
+  height: 5rem;
+  top: 50%;
+  position: absolute;
+  color: white;
+  z-index: 100000 !important;
+  vertical-align: -.125em;
+  border: .5em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: .75s linear infinite spinner-border;
+  animation: .75s linear infinite spinner-border;
+}

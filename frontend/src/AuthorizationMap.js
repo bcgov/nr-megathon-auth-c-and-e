@@ -170,7 +170,8 @@ class AuthorizationMap extends Component {
     lat: 53.7267,
     long: -127.7384,
     zoom: 6,
-    active: "authorization"
+    active: "application_progress_report",
+    isLoading: false,
   };
 
   componentDidMount() {
@@ -203,6 +204,7 @@ class AuthorizationMap extends Component {
   }
 
 handleButtonClick = (button) => {
+  this.map.removeLayer(this.markerClusterGroup);
   this.handleMapInitiate(button);
 }
 
@@ -233,7 +235,6 @@ handleButtonClick = (button) => {
   };
 
   handlePinClick = data => e => {
-    console.log(data);
     if (this.state.currentMarker) {
       this.state.currentMarker.setIcon(UNSELECTED_ICON);
     }
@@ -245,13 +246,14 @@ handleButtonClick = (button) => {
   };
 
   addPinClusters = (button) => {
+    this.setState({isLoading: true})
     // Add Clustered MinePins
     this.markerClusterGroup = L.markerClusterGroup({ animate: false });
 
     axios
       .get(`http://localhost:3000/${button}`)
       .then(res => {
-        this.setState({active: button})
+        this.setState({active: button, isLoading: false})
         res.data.map(this.createPin);
         console.log(res)
       })
@@ -366,7 +368,6 @@ handleButtonClick = (button) => {
   }
 
   renderPopup = (data) => {
-    console.log(data);
     return ReactDOMServer.renderToStaticMarkup(<div style={{overflow: "auto"}}>{JSON.stringify(data, null)}</div>);
   };
 
@@ -374,12 +375,21 @@ handleButtonClick = (button) => {
     return (
       <div>
         <div className="btn-group button-group-center">
-  <a href="#authorization" className="btn btn-primary" aria-current="page" active={this.state.active === "authorization"} onClick={(event) => this.handleButtonClick("authorization")}>Authorization</a>
-  <a href="#nrced" className="btn btn-primary" active={this.state.active === "nrced"} onClick={(event) => this.handleButtonClick("nrced")}>NRCED Inspections</a>
-  <a href="#application" className="btn btn-primary">Applications</a>
-</div>
+          <a href="#application" className="btn btn-secondary" active={this.state.active === "application_progress_report"} onClick={(event) => this.handleButtonClick("application_progress_report")}>Applications</a>
+          <a href="#authorization" className="btn btn-secondary" aria-current="page" active={this.state.active === "authorization"} onClick={(event) => this.handleButtonClick("authorization")}>Authorization</a>
+          <a href="#nrced" className="btn btn-secondary" active={this.state.active === "nrced"} onClick={(event) => this.handleButtonClick("nrced")}>NRCED Inspections</a>
+          <a href="#nrced" className="btn btn-secondary" active={this.state.active === "discharge"} onClick={(event) => this.handleButtonClick("discharge")}>Discharge</a>
+      </div>
+      {this.state.isLoading && (
+        <div class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
       <div
         style={{ height: "91.5vh", width: "100%", zIndex: 0, bottom: 0, position: "absolute" }}
+        // style={{ height: "70.5vh", width: "100%", zIndex: 0, bottom: 0, position: "absolute" }}
         id="leaflet-map"
       />
       </div>
