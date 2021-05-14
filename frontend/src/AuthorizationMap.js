@@ -374,8 +374,8 @@ handleButtonClick = (button) => {
         <div className="btn-group button-group-center">
           <a href="#application_progress_report" className="btn btn-secondary" active={this.state.active === "application_progress_report"} onClick={(event) => this.handleButtonClick("application_progress_report")}>Applications</a>
           <a href="#authorization" className="btn btn-secondary" aria-current="page" active={this.state.active === "authorization"} onClick={(event) => this.handleButtonClick("authorization")}>Authorization</a>
-          <a href="#nrced" className="btn btn-secondary" active={this.state.active === "nrced"} onClick={(event) => this.handleButtonClick("nrced")}>Inspections</a>
-          <a href="#discharge" className="btn btn-secondary" active={this.state.active === "discharge"} onClick={(event) => this.handleButtonClick("discharge")}>Discharge</a>
+          <a href="#nrced" className="btn btn-secondary" active={this.state.active === "nrced"} onClick={(event) => this.handleButtonClick("nrced")}>Compliance & Enforcement</a>
+          <a href="#discharge" className="btn btn-secondary" active={this.state.active === "discharge"} onClick={(event) => this.handleButtonClick("discharge")}>Waste Discharge</a>
       </div>
       {this.state.isLoading && (
         <div class="text-center">
