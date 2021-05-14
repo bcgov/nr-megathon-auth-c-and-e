@@ -219,19 +219,17 @@ handleButtonClick = (button) => {
   };
 
   createPin = (data) => {
+    if (data.latitude && data.longitude) {
     const marker = L.marker([data.latitude, data.longitude]).bindPopup(
       "Loading..."
     );
 
     let icon = UNSELECTED_ICON;
-    // if (this.props.mineGuid === mine.mine_guid) {
-    //   icon = SELECTED_ICON;
-    //   this.setState({ currentMarker: marker });
-    // }
     marker.setIcon(icon);
 
     this.markerClusterGroup.addLayer(marker);
     marker.on("click", this.handlePinClick(data));
+    }
   };
 
   handlePinClick = data => e => {
@@ -255,11 +253,11 @@ handleButtonClick = (button) => {
       .then(res => {
         this.setState({active: button, isLoading: false})
         res.data.map(this.createPin);
+        console.log(res.data)
       })
       .catch(error => {
         console.log(error);
       });
-    // this.createPin();
     this.map.addLayer(this.markerClusterGroup);
   };
 
@@ -374,10 +372,10 @@ handleButtonClick = (button) => {
     return (
       <div>
         <div className="btn-group button-group-center">
-          <a href="#application" className="btn btn-secondary" active={this.state.active === "application_progress_report"} onClick={(event) => this.handleButtonClick("application_progress_report")}>Applications</a>
+          <a href="#application_progress_report" className="btn btn-secondary" active={this.state.active === "application_progress_report"} onClick={(event) => this.handleButtonClick("application_progress_report")}>Applications</a>
           <a href="#authorization" className="btn btn-secondary" aria-current="page" active={this.state.active === "authorization"} onClick={(event) => this.handleButtonClick("authorization")}>Authorization</a>
-          <a href="#nrced" className="btn btn-secondary" active={this.state.active === "nrced"} onClick={(event) => this.handleButtonClick("nrced")}>NRCED Inspections</a>
-          <a href="#nrced" className="btn btn-secondary" active={this.state.active === "discharge"} onClick={(event) => this.handleButtonClick("discharge")}>Discharge</a>
+          <a href="#nrced" className="btn btn-secondary" active={this.state.active === "nrced"} onClick={(event) => this.handleButtonClick("nrced")}>Inspections</a>
+          <a href="#discharge" className="btn btn-secondary" active={this.state.active === "discharge"} onClick={(event) => this.handleButtonClick("discharge")}>Discharge</a>
       </div>
       {this.state.isLoading && (
         <div class="text-center">

@@ -10,11 +10,16 @@ function App() {
   return (
     <Router>
       <div className="App">
+        
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
           <div className="container-fluid">
             <a href="https://gov.bc.ca/">
               <img alt="BC Government Logo" src={LOGO} width={154} />
             </a>
+             <div aria-label="This application is currently in Beta phase" class="Beta-PhaseBanner">
+          Beta
+        </div>
+            <br />
             <button
               className="navbar-toggler"
               type="button"
@@ -38,14 +43,14 @@ function App() {
                     Map
                   </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link className="nav-link" to="/reporting">
                     Reporting
                   </Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <Link className="nav-link" to="/authorizations">
-                    Authorizations & Discharge
+                    Reporting
                   </Link>
                 </li>
               </ul>

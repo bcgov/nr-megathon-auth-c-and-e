@@ -1,3 +1,30 @@
+
+@font-face {
+  font-family: "BCSans";
+  font-style: normal;
+  src: url("./fonts/BCSans/BCSans-Regular.woff");
+}
+@font-face {
+  font-family: "BCSans";
+  font-style: italic;
+  src: url("./fonts/BCSans/BCSans-Italic.woff");
+}
+@font-face {
+  font-family: "BCSans";
+  font-weight: bold;
+  src: url("./fonts/BCSans/BCSans-Bold.woff");
+}
+@font-face {
+  font-family: "BCSans";
+  font-style: italic;
+  font-weight: bold;
+  src: url("./fonts/BCSans/BCSans-BoldItalic.woff");
+}
+
+body {
+  font-family: "BCSans", "Noto Sans", Verdana, Arial, sans-serif !important; 
+}
+
 .navbar-dark.bg-primary {
   background: #036 !important;
 }
@@ -99,4 +126,98 @@ h1 {
   border-radius: 50%;
   -webkit-animation: .75s linear infinite spinner-border;
   animation: .75s linear infinite spinner-border;
+}
+
+
+
+/* header banner */
+header {
+  background-color: #036;
+  border-bottom: 2px solid #fcba19;
+  padding: 0 65px 0 65px;
+  color: #fff;
+  display: flex;
+  height: 65px;
+  top: 0px;
+  position: fixed;
+  width: 100%;
+}
+
+header h1 {
+  font-family: ‘BCSans’, ‘Noto Sans’, Verdana, Arial, sans-serif;
+  font-weight: normal;  /* 400 */
+  margin: 5px 5px 0 18px;
+  visibility: hidden;
+}
+
+header .banner {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 10px 0 0;
+  /* border-style: dotted;
+  border-width: 1px;
+  border-color: lightgrey; */
+}
+
+header .other {
+  display: flex;
+  flex-grow: 1;
+  /* border-style: dotted;
+  border-width: 1px;
+  border-color: lightgrey; */
+}
+
+.Beta-PhaseBanner {
+  color: #fcba19;
+  margin-top: -1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+:focus {
+    outline: 4px solid #3B99FC;
+    outline-offset: 1px;
+  }
+
+/*
+  These are sample media queries only. Media queries are quite subjective
+  but, in general, should be made for the three different classes of screen
+  size: phone, tablet, full. 
+*/
+
+@media screen and (min-width: 600px) and (max-width: 899px) {
+  header h1 {
+    font-size: calc(7px + 2.2vw);
+    visibility: visible;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  header h1 {
+    font-size: 2.0em;
+    visibility: visible;
+  }
+}
+
+.navbar-nav {
+  float: right;
+  display: contents;
+}
+
+.navbar-nav .nav-link {
+  padding-right: 10px;
+  margin-top: 10px;
+  color: white;
+}
+
+.inline-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.between {
+  justify-content: space-between;
 }
