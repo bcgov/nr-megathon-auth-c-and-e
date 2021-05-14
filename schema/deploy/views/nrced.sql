@@ -91,8 +91,19 @@ BEGIN;
        (record ->> '_sourceRefNrisId')::int as nris_id,
        record ->> 'recordName' as name,
        record ->> 'recordType' as type,
-       (record ->> 'dateIssued')::timestamptz as date_issued
-
+       (record ->> 'dateIssued')::timestamptz as date_issued,
+       record ->> 'issuingAgency' as issuing_agency,
+       record ->> 'author' as author,
+       record ->> 'legislationDescription' as legislation_description,
+       record ->> 'location' as location_name,
+       record -> 'centroid' -> 0 as longitude,
+       record -> 'centroid' -> 1 as latitude,
+       record ->> 'outcomeStatus' as outcome_status,
+       record ->> 'outcomeDescription' as outcome_description,
+       record ->> 'summary' as summary,
+       (record ->> 'dateAdded')::timestamptz as date_added,
+       (record ->> 'dateUpdated')::timestamptz as date_updated,
+       (record ->> 'datePublished')::timestamptz as date_published
     from x
  );
 
