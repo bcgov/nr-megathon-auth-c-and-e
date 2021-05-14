@@ -1,0 +1,35 @@
+# Docker build should be run from parent directory
+FROM perl:5.26
+
+ENV USER_ID=1001
+ENV CIIP_HOME=/root
+ENV HOME=/root
+COPY schema/ ${HOME}/schema/
+COPY data/ ${HOME}/data/
+WORKDIR ${HOME}/schema
+
+# jq is used by trigger-airflow-dag.sh
+RUN apt-get update && \
+  apt-get install -y postgresql-client jq && \
+  apt-get clean
+
+# CPAN needs to install dependencies for all schemas, one directory up
+RUN cpanm --notest --local-lib ../extlib --installdeps .
+
+# CPAN can install scripts. They should be available from mod_perl too.
+ENV PATH="$PATH:$HOME/extlib/bin"
+# And we have to set Perl include path too because mod_perl's PerlSwitches
+# does not apply to them.
+ENV PERL5LIB=${HOME}/extlib/lib/perl5
+
+
+# Make everything in the home group-writable, to accomodate anyuid (in OpenShift)
+# /etc/passwd needs to be group-writable too -_-
+# Needs to be done as root to chown
+RUN useradd -ms /bin/bash -d ${CIIP_HOME} --uid ${USER_ID} ciip
+RUN chown -R ciip:0 ${CIIP_HOME} && \
+    chmod -R g+rwX ${CIIP_HOME}
+
+EXPOSE 3000
+USER ${USER_ID}
+WORKDIR ${CIIP_HOME}

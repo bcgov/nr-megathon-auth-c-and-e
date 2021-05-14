@@ -3,7 +3,7 @@
 Prerequesites:
 
 - install cpanminus: `cpan App::cpanminus`
-- install sqitch & postgres connector: `cpanm --installdeps .`
+- install sqitch & postgres connector: `cd schema; cpanm --installdeps .`
 
 Data deployment:
 
