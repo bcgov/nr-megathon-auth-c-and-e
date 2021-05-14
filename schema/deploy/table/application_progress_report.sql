@@ -30,6 +30,6 @@ create table ams_nrced.application_progress_report(
 );
 
 \COPY ams_nrced.application_progress_report(job_type,tracking_number,authorization_number,job_status,sap_phase,received_date,created_date,completed_date,authorization_type,administrative_area,amendment_type,latitude,longitude,application_type,transaction_type,complexity,intake,preliminary_application,applicant_work_window,in_screening,review_and_decision,processing,days_in_process,withdrawn_date) FROM '../data/application_phase_progress_report.csv' WITH DELIMITER ',' CSV HEADER;
-
+update ams_nrced.application_progress_report set longitude = -longitude;
 
 COMMIT;
