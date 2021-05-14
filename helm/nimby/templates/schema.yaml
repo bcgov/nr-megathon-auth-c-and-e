@@ -41,6 +41,7 @@ spec:
                   fieldPath: metadata.namespace
           name: {{ template "nimby.fullname" . }}-schema
           image: docker.pkg.github.com/bcgov/nr-megathon-auth-c-and-e/schema:main
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: 500m
