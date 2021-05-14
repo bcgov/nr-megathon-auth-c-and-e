@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import AuthorizationMap from "./AuthorizationMap";
 import Home from "./Home";
 import Reporting from "./Reporting";
+import AuthorizationDischarge from "./AuthorizationDischarge";
 
 function App() {
   return (
@@ -42,6 +43,11 @@ function App() {
                     Reporting
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/authorizations">
+                    Authorizations & Discharge
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -56,8 +62,10 @@ function App() {
           <Route path="/reporting">
             <Reporting />
           </Route>
+           <Route path="/authorizations">
+            <AuthorizationDischarge />
+          </Route>
         </Switch>
-        {/* <AuthorizationMap /> */}
         <nav className="navbar fixed-bottom navbar-dark bg-primary">
           <div className="container-fluid">
             <a className="navbar-brand" href="#"></a>

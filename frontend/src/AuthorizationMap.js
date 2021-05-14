@@ -2,6 +2,7 @@
 /* eslint-disable */
 import React, { Component } from "react";
 import L from "leaflet";
+import axios from 'axios';
 import LeafletWms from "leaflet.wms";
 import scriptLoader from "react-async-script-loader";
 import ReactDOMServer from "react-dom/server";
@@ -168,7 +169,9 @@ class AuthorizationMap extends Component {
     currentMarker: null,
     lat: 53.7267,
     long: -127.7384,
-    zoom: 6
+    zoom: 6,
+    active: "application_progress_report",
+    isLoading: false,
   };
 
   componentDidMount() {
@@ -182,17 +185,28 @@ class AuthorizationMap extends Component {
       minZoom: 4
     });
 
+    // this.fetchData();
+
     // Add Topographic BaseMap by default
     L.tileLayer(
       "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
     ).addTo(this.map);
 
     // Load external leaflet libraries for WebMap and Widgets
-    this.asyncScriptStatusCheck();
+    this.handleMapInitiate(this.state.active)
+  }
+
+  handleMapInitiate = (button) => {
+     this.asyncScriptStatusCheck();
 
     // Add MinePin clusters
-    this.addPinClusters();
+    this.addPinClusters(button);
   }
+
+handleButtonClick = (button) => {
+  this.map.removeLayer(this.markerClusterGroup);
+  this.handleMapInitiate(button);
+}
 
   asyncScriptStatusCheck = () => {
     if (this.props.isScriptLoaded && this.props.isScriptLoadSucceed) {
@@ -204,8 +218,8 @@ class AuthorizationMap extends Component {
     }
   };
 
-  createPin = () => {
-    const marker = L.marker([this.state.lat, this.state.long]).bindPopup(
+  createPin = (data) => {
+    const marker = L.marker([data.latitude, data.longitude]).bindPopup(
       "Loading..."
     );
 
@@ -217,10 +231,10 @@ class AuthorizationMap extends Component {
     marker.setIcon(icon);
 
     this.markerClusterGroup.addLayer(marker);
-    marker.on("click", this.handlePinClick());
+    marker.on("click", this.handlePinClick(data));
   };
 
-  handlePinClick = mine => e => {
+  handlePinClick = data => e => {
     if (this.state.currentMarker) {
       this.state.currentMarker.setIcon(UNSELECTED_ICON);
     }
@@ -228,13 +242,24 @@ class AuthorizationMap extends Component {
     this.setState({ currentMarker: e.target });
 
     const popup = e.target.getPopup();
-    popup.setContent(this.renderPopup());
+    popup.setContent(this.renderPopup(data));
   };
 
-  addPinClusters = () => {
+  addPinClusters = (button) => {
+    this.setState({isLoading: true})
     // Add Clustered MinePins
     this.markerClusterGroup = L.markerClusterGroup({ animate: false });
-    this.createPin();
+
+    axios
+      .get(`http://localhost:3000/${button}`)
+      .then(res => {
+        this.setState({active: button, isLoading: false})
+        res.data.map(this.createPin);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // this.createPin();
     this.map.addLayer(this.markerClusterGroup);
   };
 
@@ -327,10 +352,10 @@ class AuthorizationMap extends Component {
 
       // Esri WebMap resets the zoom level, zoom back to props coordinates after they're done loading
       const resetZoomCheckID = setInterval(() => {
-        if (this.map.getZoom() !== this.props.zoom) {
+        if (this.map.getZoom() !== this.state.zoom) {
           this.map.setView(
-            [this.props.lat, this.props.long],
-            this.props.zoom,
+            [this.state.lat, this.state.long],
+            this.state.zoom,
             true
           );
 
@@ -341,16 +366,31 @@ class AuthorizationMap extends Component {
     });
   }
 
-  renderPopup = () => {
-    return ReactDOMServer.renderToStaticMarkup(<div>This is a static Pin</div>);
+  renderPopup = (data) => {
+    return ReactDOMServer.renderToStaticMarkup(<div style={{overflow: "auto"}}>{JSON.stringify(data, null)}</div>);
   };
 
   render() {
     return (
+      <div>
+        <div className="btn-group button-group-center">
+          <a href="#application" className="btn btn-secondary" active={this.state.active === "application_progress_report"} onClick={(event) => this.handleButtonClick("application_progress_report")}>Applications</a>
+          <a href="#authorization" className="btn btn-secondary" aria-current="page" active={this.state.active === "authorization"} onClick={(event) => this.handleButtonClick("authorization")}>Authorization</a>
+          <a href="#nrced" className="btn btn-secondary" active={this.state.active === "nrced"} onClick={(event) => this.handleButtonClick("nrced")}>NRCED Inspections</a>
+          <a href="#nrced" className="btn btn-secondary" active={this.state.active === "discharge"} onClick={(event) => this.handleButtonClick("discharge")}>Discharge</a>
+      </div>
+      {this.state.isLoading && (
+        <div class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
       <div
-        style={{ height: "100vh", width: "100%", zIndex: 0 }}
+        style={{ height: "91.5vh", width: "100%", zIndex: 0, bottom: 0, position: "absolute" }}
         id="leaflet-map"
       />
+      </div>
     );
   }
 }
