@@ -36,7 +36,7 @@ const Home = () => {
        <div style={{margin: "10px"}}>
         <p>A waste discharge authorization is written permission to{" "} 
           <a href="https://www2.gov.bc.ca/gov/content/environment/waste-management/waste-discharge-authorization/find-authorization" >release waste</a>
-           into the environment.</p>
+           {" "}into the environment.</p>
       </div>
       <h2>Compliance & Enforcement</h2>
       <div style={{margin: "10px"}}>

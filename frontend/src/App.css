@@ -32,6 +32,7 @@ body {
 .btn-secondary {
   background: #fcba19 !important;
   border: #fcba19 !important;
+  color: black;
 }
 
 .btn-secondary:hover {
