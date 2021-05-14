@@ -86,7 +86,13 @@ BEGIN;
     )
     select
        record -> 'issuedTo' ->> 'companyName' as company_name,
-       record ->> '_sourceRefNrisId' as nris_id
+       record -> 'issuedTo' ->> 'fullName' as full_name,
+       record -> '_epicProjectId' as epic_project_id,
+       (record ->> '_sourceRefNrisId')::int as nris_id,
+       record ->> 'recordName' as name,
+       record ->> 'recordType' as type,
+       (record ->> 'dateIssued')::timestamptz as date_issued
+
     from x
  );
 
