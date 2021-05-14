@@ -35,5 +35,6 @@ create table ams_nrced.discharge(
 );
 
 \copy ams_nrced.discharge(authorization_number,status,company,authorization_type,discharge_type,bcenic,ems_site,comparative_priority_index,wdr_regulation,wdr_description,facility_description,discharge_source,discharge_contaminant,discharge_min,discharge_avg,discharge_max,discharge_start_date,discharge_end_date,proposed_treatment_disposal,administrative_area,region,regional_district,nearest_municipality,facility_address,latitude,longitude,issue_date,expiry_date) FROM '../data/all_ams_discharges.csv' WITH DELIMITER ',' CSV HEADER
+update ams_nrced.discharge set longitude = -longitude;
 
 COMMIT;
